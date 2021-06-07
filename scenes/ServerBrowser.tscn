@@ -1,0 +1,120 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://resources/Font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scripts/ServerBrowser.gd" type="Script" id=2]
+[ext_resource path="res://scenes/ServerListener.tscn" type="PackedScene" id=3]
+
+[node name="ServerBrowser" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundPanel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 96.0
+margin_top = 162.0
+margin_right = -96.0
+margin_bottom = -54.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ManualSetup" type="Button" parent="BackgroundPanel"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -473.0
+margin_top = -175.0
+margin_right = -30.0
+margin_bottom = -29.0
+custom_fonts/font = ExtResource( 1 )
+text = "Manual Setup"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoBack" type="Button" parent="BackgroundPanel"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = -170.0
+margin_right = 473.0
+margin_bottom = -24.0
+custom_fonts/font = ExtResource( 1 )
+text = "Go Back"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BackgroundPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 70.0
+margin_top = 40.0
+margin_right = -70.0
+margin_bottom = -175.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SearchingForServers" type="Label" parent="BackgroundPanel/VBoxContainer"]
+margin_right = 1588.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 70 )
+custom_fonts/font = ExtResource( 1 )
+text = "Searching For Servers"
+align = 1
+valign = 1
+
+[node name="ServerIpTextEditor" type="LineEdit" parent="BackgroundPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -403.0
+margin_top = -243.0
+margin_right = 403.0
+margin_bottom = -138.0
+custom_fonts/font = ExtResource( 1 )
+align = 1
+
+[node name="JoinServer" type="Button" parent="BackgroundPanel/ServerIpTextEditor"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -221.5
+margin_top = 94.5
+margin_right = 221.5
+margin_bottom = 240.5
+custom_fonts/font = ExtResource( 1 )
+text = "Join Server"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="BackgroundPanel/ServerIpTextEditor"]
+anchor_right = 1.0
+margin_top = -105.0
+custom_fonts/font = ExtResource( 1 )
+text = "Type and Server IP"
+align = 1
+valign = 1
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 1.0
+margin_bottom = 176.0
+custom_fonts/font = ExtResource( 1 )
+text = "Server Browser"
+align = 1
+valign = 1
+
+[node name="ServerListener" parent="." instance=ExtResource( 3 )]
+
+[connection signal="pressed" from="BackgroundPanel/ManualSetup" to="." method="_on_ManualSetup_pressed"]
+[connection signal="pressed" from="BackgroundPanel/GoBack" to="." method="_on_GoBack_pressed"]
+[connection signal="pressed" from="BackgroundPanel/ServerIpTextEditor/JoinServer" to="." method="_on_JoinServer_pressed"]
+[connection signal="new_server" from="ServerListener" to="." method="_on_ServerListener_new_server"]
+[connection signal="remove_server" from="ServerListener" to="." method="_on_ServerListener_remove_server"]
